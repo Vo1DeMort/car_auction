@@ -1,0 +1,5 @@
+searching cars
+social auth setup 
+websocket for live bidding
+redisign side  bar and nav bar
+

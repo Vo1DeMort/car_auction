@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  {% for car in object_list %}
+
+   <div class="accordion m-4" id="accordionExample">
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+           {{car}}
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+           <strong>Car owner - {{car.owner.username}}</strong> 
+           <ul class="list-group">
+             <li class="list-group-item">company -{{car.car_company}}</li>
+             <li class="list-group-item">year -{{car.year}}</li>
+             <li class="list-group-item">made in -{{car.made_in}}</li>
+             <li class="list-group-item">milage -{{car.milage}}</li>
+             <li class="list-group-item">transimission-{{car.transmission_type}}</li>
+             <li class="list-group-item">drivetain-{{car.drivetrain}}</li>
+             <li class="list-group-item">color-{{car.color}}</li>
+             <li class="list-group-item">available for auction-{{car.available_for_auction}}</li>
+           </ul>
+           </br>
+           {% if car.available_for_auction %}
+              <div class="d-flex justify-content-end align-items-center">
+                <a href="{% url 'auction' car.id %}" class="btn btn-secondary">Start Bidding</a>
+              </div>
+           {% endif %}
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  {% endfor %}
+{% endblock %}
