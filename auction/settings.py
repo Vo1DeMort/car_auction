@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,17 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    #3rd parties 
-
+    # 3rd parties
     "crispy_forms",
     "crispy_bootstrap5",
-
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-
     # local
     "core",
 ]
@@ -138,10 +135,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
-
-
-
 """ custom settings """
 
 # crispy_forms
@@ -160,8 +153,11 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # allauth send success registration to user : for now no SMTP  so just to console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# login and logout redirect 
-LOGIN_REDIRECT_URL = 'home_page'
-LOGOUT_REDIRECT_URL = 'home_page'
+# login and logout redirect
+LOGIN_REDIRECT_URL = "home_page"
+LOGOUT_REDIRECT_URL = "home_page"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

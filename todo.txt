@@ -3,3 +3,19 @@ social auth setup
 websocket for live bidding
 redisign side  bar and nav bar
 
+
+# override id filed for better security using uuid field
+  id = models.UUIDField( # new
+  primary_key=True,
+  default=uuid.uuid4,
+  editable=False)
+
+  in the url <uuid:pk> instead of int
+
+
+# new stuffs
+  permission required mixins, user passes test mixi
+
+limit the free users' auction frequency , then allow the paid users to do unlimitted
+
+i could write queries in the shell to practise

@@ -3,8 +3,14 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 
+""" should override id fields to uuid 
+    be back when i am done with the functionalities
+"""
+
 
 class AppUser(AbstractUser):
+    profile_img = models.ImageField(null=True, blank=True, upload_to="profile_imgs/")
+    about_me = models.TextField(null=True, blank=True, max_length=300)
 
     def __str__(self):
         return self.username
@@ -38,27 +44,23 @@ class Car(models.Model):
     milage = models.FloatField()
     transmission_type = models.CharField(max_length=6, choices=TRANSMISSIONS)
     drivetrain = models.CharField(max_length=3, choices=DRIVETRAINS)
-    color = models.CharField(max_length=20,null=True,blank=True)
+    color = models.CharField(max_length=20, null=True, blank=True)
     auction_start_time = models.DateTimeField(auto_now_add=True)
     # this field will be update when available_for_auction is updated
     auction_end_date = models.DateTimeField(auto_now=True)
     available_for_auction = models.BooleanField(default=False)
     # contstains are null just for the developemnt purposes
-    images = models.ImageField(null=True, blank=True)
-
-    """ transmission_type , drive train and available_for_auction don't show in the retrieve 
-        but works in admin panel
-    """
-
-
-    def __str__(self):
-        return f"{self.car_model} "
+    images = models.ImageField(upload_to="cars/", null=True, blank=True)
+    # need to read about file fields
 
     class Meta:
         ordering = ["-auction_start_time"]
 
+    def __str__(self):
+        return f"{self.car_model} "
 
-'''
+    # def get_absolute_url
+
 
 class Bid(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
@@ -69,6 +71,6 @@ class Bid(models.Model):
     offer_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.car.car_model} of {self.car.owner.username} was offered {self.offer}$ by {self.bidder.username}"
-                    '''
-
+        return (
+            f"{self.car.car_model} was offered {self.offer} by {self.bidder.username}"
+        )

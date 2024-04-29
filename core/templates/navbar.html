@@ -19,6 +19,7 @@
             <a class="btn btn-info mx-2" href="{% url 'create' %}">create_auction</a>
           </li>
 
+
           <li class="nav-item">
             <a class="btn btn-info mx-2" href="#topics">search car</a>
           </li>
@@ -28,6 +29,11 @@
           <li class="nav-item">
             <a class="btn btn-info mx-2" href="#topics">chat</a>
           </li>
+
+          <li class="nav-item">
+           <a class="btn btn-info mx-2" href="{% url "profile" %}">profile</a>
+          </li>
+
           <li class="nav-item ms-2 d-none d-md-inline">
             {% if request.user.is_authenticated %}
               <!-- logout use form method -->
